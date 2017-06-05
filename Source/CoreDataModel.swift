@@ -67,6 +67,19 @@ public struct CoreDataModel: Equatable {
             return storeType.storeDirectory()?.appendingPathComponent(databaseFileName)
         }
     }
+    
+    /**
+     The file URL specifying the full path to the seed store.
+     
+     - note: If the store is in-memory, then this value will be `nil`.
+     */
+    public var seedURL: URL? {
+        get {
+            guard let path = bundle.path(forResource: "seedDatabase", ofType: ModelFileExtension.sqlite.rawValue) else { return nil }
+            
+            return URL(string: path)
+        }
+    }
 
     /// The file URL specifying the model file in the bundle specified by `bundle`.
     public var modelURL: URL {
