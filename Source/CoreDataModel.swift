@@ -76,8 +76,8 @@ public struct CoreDataModel: Equatable {
     public var seedURL: URL? {
         get {
             guard let path = bundle.path(forResource: "seedDatabase", ofType: ModelFileExtension.sqlite.rawValue) else { return nil }
-            
-            return URL(string: path)
+
+            return URL(fileURLWithPath: path)
         }
     }
 
