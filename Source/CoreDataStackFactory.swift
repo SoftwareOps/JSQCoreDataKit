@@ -56,7 +56,7 @@ public struct CoreDataStackFactory: Equatable {
 
      - returns: A new `CoreDataStackFactory` instance.
      */
-    public init(model: CoreDataModel, options: PersistentStoreOptions? = defaultStoreOptions, userConfiguration: String?, seedConfiguration: String?) {
+    public init(model: CoreDataModel, options: PersistentStoreOptions? = defaultStoreOptions, userConfiguration: String? = nil, seedConfiguration: String? = nil) {
         self.model = model
         self.options = options
         self.userConfiguration = userConfiguration
