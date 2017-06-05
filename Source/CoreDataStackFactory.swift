@@ -140,7 +140,7 @@ public struct CoreDataStackFactory: Equatable {
             try storeCoordinator.addPersistentStore(ofType: model.storeType.type,
                                                     configurationName: seedConfiguration,
                                                     at: seedURL,
-                                                    options: options)
+                                                    options: [NSReadOnlyPersistentStoreOption : true])
         }
         
         return storeCoordinator
