@@ -75,9 +75,21 @@ public struct CoreDataModel: Equatable {
      */
     public var seedURL: URL? {
         get {
-            guard let path = bundle.path(forResource: "seedDatabase", ofType: ModelFileExtension.sqlite.rawValue) else { return nil }
-
-            return URL(fileURLWithPath: path)
+            if let url = bundle.url(forResource: "seedDatabase", withExtension: ModelFileExtension.bundle.rawValue) {
+                return url
+            } else {
+                guard let seedPath = bundle.path(forResource: "seedDatabase", ofType: ModelFileExtension.sqlite.rawValue) else { return nil }
+                let seedUrl = URL(fileURLWithPath: seedPath)
+                
+                do {
+                    try FileManager.default.copyItem(at: seedUrl, to: defaultDirectoryURL().appendingPathComponent("seedDatabase." + ModelFileExtension.sqlite.rawValue))
+                    
+                    return bundle.url(forResource: "seedDatabase", withExtension: ModelFileExtension.bundle.rawValue)
+                } catch let error as NSError {
+                    print("Couldn't copy file to final location! Error:\(error.description)")
+                    return nil
+                }
+            }
         }
     }
 
