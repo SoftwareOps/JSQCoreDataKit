@@ -42,6 +42,7 @@ public struct CoreDataStackFactory: Equatable {
      The default value is `DefaultStoreOptions`.
      */
     public let options: PersistentStoreOptions?
+    public let seedOptions: PersistentStoreOptions?
     
     public let userConfiguration: String?
     public let seedConfiguration: String?
@@ -56,9 +57,10 @@ public struct CoreDataStackFactory: Equatable {
 
      - returns: A new `CoreDataStackFactory` instance.
      */
-    public init(model: CoreDataModel, options: PersistentStoreOptions? = defaultStoreOptions, userConfiguration: String? = nil, seedConfiguration: String? = nil) {
+    public init(model: CoreDataModel, options: PersistentStoreOptions? = defaultStoreOptions, userConfiguration: String? = nil, seedOptions: PersistentStoreOptions? = defaultStoreOptions, seedConfiguration: String? = nil) {
         self.model = model
         self.options = options
+        self.seedOptions = seedOptions
         self.userConfiguration = userConfiguration
         self.seedConfiguration = seedConfiguration
     }
@@ -140,7 +142,7 @@ public struct CoreDataStackFactory: Equatable {
             try storeCoordinator.addPersistentStore(ofType: model.storeType.type,
                                                     configurationName: seedConfiguration,
                                                     at: seedURL,
-                                                    options: [NSReadOnlyPersistentStoreOption : true])
+                                                    options: seedOptions)
         }
         
         return storeCoordinator

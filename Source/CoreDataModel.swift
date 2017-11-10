@@ -146,10 +146,10 @@ public struct CoreDataModel: Equatable {
 
      - returns: A new `CoreDataModel` instance.
      */
-    public init(name: String, bundle: Bundle = .main, storeType: StoreType = .sqlite(defaultDirectoryURL())) {
+    public init(name: String, bundle: Bundle = .main, storeType: StoreType?) {
         self.name = name
         self.bundle = bundle
-        self.storeType = storeType
+        self.storeType = storeType ?? .sqlite(defaultDirectoryURL())
     }
 
 
