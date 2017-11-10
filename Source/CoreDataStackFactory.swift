@@ -138,9 +138,9 @@ public struct CoreDataStackFactory: Equatable {
                                                 at: model.storeURL,
                                                 options: options)
         
-        if let seedConfiguration = seedConfiguration, let seedURL = model.seedURL {
+        if let seedURL = model.seedURL {
             try storeCoordinator.addPersistentStore(ofType: model.storeType.type,
-                                                    configurationName: seedConfiguration,
+                                                    configurationName: seedConfiguration ?? nil,
                                                     at: seedURL,
                                                     options: seedOptions)
         }
