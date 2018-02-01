@@ -50,6 +50,9 @@ public struct CoreDataModel: Equatable {
 
     /// The name of the Core Data model resource.
     public let name: String
+    
+    /// The name of the Core Data model resource.
+    public let seedName: String?
 
     /// The bundle in which the model is located.
     public let bundle: Bundle
@@ -75,7 +78,9 @@ public struct CoreDataModel: Equatable {
      */
     public var seedURL: URL? {
         get {
-            let fileURL = defaultDirectoryURL().appendingPathComponent("seedDatabase." + ModelFileExtension.sqlite.rawValue)
+            guard let seedName = seedName else { return nil }
+            
+            let fileURL = defaultDirectoryURL().appendingPathComponent("\(seedName)." + ModelFileExtension.sqlite.rawValue)
             let fm = FileManager.default
             
             if fm.fileExists(atPath: fileURL.path) {
@@ -151,12 +156,12 @@ public struct CoreDataModel: Equatable {
 
      - returns: A new `CoreDataModel` instance.
      */
-    public init(name: String, bundle: Bundle = .main, storeType: StoreType?) {
+    public init(name: String, bundle: Bundle = .main, storeType: StoreType?, seedName: String? = nil) {
         self.name = name
         self.bundle = bundle
         self.storeType = storeType ?? .sqlite(defaultDirectoryURL())
+        self.seedName = seedName
     }
-
 
     // MARK: Methods
 
