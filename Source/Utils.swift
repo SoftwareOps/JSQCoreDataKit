@@ -36,7 +36,7 @@ public let defaultStoreOptions: PersistentStoreOptions = [
 
 // MARK: Internal
 
-internal func defaultDirectoryURL() -> URL {
+ public func defaultDirectoryURL() -> URL {
     do {
         #if os(tvOS)
             let searchPathDirectory = FileManager.SearchPathDirectory.cachesDirectory
