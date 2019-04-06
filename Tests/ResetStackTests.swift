@@ -80,7 +80,7 @@ final class ResetStackTests: TestCase {
 
     func test_ThatPersistentStore_WithChanges_DoesNotHaveObjects_AfterReset() {
         // GIVEN: a stack and persistent store with data
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         let factory = CoreDataStackFactory(model: model)
         let stack = factory.createStack().stack()!
         let context = stack.mainContext

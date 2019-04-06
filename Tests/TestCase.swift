@@ -42,7 +42,7 @@ extension CoreDataStackFactory {
 
 extension XCTestCase {
     func cleanUp() {
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         _ = try? model.removeExistingStore()
     }
 }

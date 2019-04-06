@@ -28,14 +28,14 @@ import JSQCoreDataKit
 class StackTests: XCTestCase {
 
     override func tearDown() {
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         _ = try? model.removeExistingStore()
         super.tearDown()
     }
 
     func test_ThatSQLiteStack_InitializesSuccessfully() {
         // GIVEN: a SQLite model
-        let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle)
+		let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
 
         // WHEN: we create a stack
         let factory = CoreDataStackFactory(model: sqliteModel)
@@ -80,7 +80,7 @@ class StackTests: XCTestCase {
 
     func test_ThatChildContext_IsCreatedSuccessfully_WithDefaultParameters() {
         // GIVEN: a model and stack
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         let factory = CoreDataStackFactory(model: model)
         let result = factory.createStack()
         let stack = result.stack()!
@@ -97,7 +97,7 @@ class StackTests: XCTestCase {
 
     func test_ThatChildContext_IsCreatedSuccessfully_WithCustomParameters() {
         // GIVEN: a model and stack
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         let factory = CoreDataStackFactory(model: model)
         let result = factory.createStack()
         let stack = result.stack()!
@@ -113,7 +113,7 @@ class StackTests: XCTestCase {
     }
 
     func test_Stack_Description() {
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         let factory = CoreDataStackFactory(model: model)
         let result = factory.createStack()
         let stack = result.stack()!

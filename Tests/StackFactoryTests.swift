@@ -45,7 +45,7 @@ class StackFactoryTests: TestCase {
 
     func test_ThatStackFactory_CreatesStackInBackground_Successfully() {
         // GIVEN: a core data model
-        let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle)
+		let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
 
         // GIVEN: a factory
         let factory = CoreDataStackFactory(model: sqliteModel)
@@ -81,7 +81,7 @@ class StackFactoryTests: TestCase {
 
     func test_ThatStackFactory_CreatesStackSynchronously_Successfully() {
         // GIVEN: a core data model
-        let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle)
+		let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
 
         // GIVEN: a factory
         let factory = CoreDataStackFactory(model: sqliteModel)
@@ -107,7 +107,7 @@ class StackFactoryTests: TestCase {
         let factory4 = CoreDataStackFactory(model: inMemoryModel, options: nil)
         XCTAssertEqual(factory3, factory4)
 
-        let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle)
+		let sqliteModel = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         let sqliteFactory = CoreDataStackFactory(model: sqliteModel)
         XCTAssertNotEqual(factory1, sqliteFactory)
     }

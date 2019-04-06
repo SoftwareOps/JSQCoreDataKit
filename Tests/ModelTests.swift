@@ -28,7 +28,7 @@ import JSQCoreDataKit
 class ModelTests: XCTestCase {
 
     override func setUp() {
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         _ = try? model.removeExistingStore()
         super.setUp()
     }
@@ -37,7 +37,7 @@ class ModelTests: XCTestCase {
         // GIVEN: a model name and bundle
 
         // WHEN: we create a model
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
 
         // THEN: the model has the correct name, bundle, and type
         XCTAssertEqual(model.name, modelName)
@@ -156,7 +156,7 @@ class ModelTests: XCTestCase {
 
     func test_ThatSQLiteModel_RemoveExistingStore_Succeeds() {
         // GIVEN: a core data model and stack
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
         let factory = CoreDataStackFactory(model: model)
         let result = factory.createStack()
         let stack = result.stack()!
@@ -185,7 +185,7 @@ class ModelTests: XCTestCase {
 
     func test_ThatSQLiteModel_RemoveExistingStore_Fails() {
         // GIVEN: a core data model
-        let model = CoreDataModel(name: modelName, bundle: modelBundle)
+		let model = CoreDataModel(name: modelName, bundle: modelBundle, storeType: .inMemory)
 
         // WHEN: we do not create a core data stack
 
