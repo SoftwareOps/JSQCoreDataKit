@@ -34,12 +34,12 @@ public protocol CoreDataEntityProtocol: class {
 public extension CoreDataEntityProtocol where Self: NSManagedObject {
 
     /// Returns a default entity name for this managed object based on its class name.
-    public static var entityName: String {
+	static var entityName: String {
         return "\(Self.self)"
     }
 
     /// Returns a new fetch request with `defaultSortDescriptors`.
-    public static var fetchRequest: NSFetchRequest<Self> {
+    static var fetchRequest: NSFetchRequest<Self> {
         let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
         request.sortDescriptors = defaultSortDescriptors
         return request as! NSFetchRequest<Self>
@@ -51,7 +51,7 @@ public extension CoreDataEntityProtocol where Self: NSManagedObject {
     /// - parameter context: The managed object context to use.
     ///
     /// - returns: Returns the entity description for this managed object.
-    public static func entity(context: NSManagedObjectContext) -> NSEntityDescription {
+    static func entity(context: NSManagedObjectContext) -> NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: entityName, in: context)!
     }
 }
